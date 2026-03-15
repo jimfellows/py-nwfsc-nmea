@@ -35,11 +35,11 @@ def register_sentences():
         'TPT': TPT, 'TPC': TPC, 'TFI': TFI, 'DAD': DAD, 'MTW': MTW, 'GLL': GLL
     }
     for stype, scls in ii_defs.items():
-        pynmea2.Sentence.sentence_types[stype] = scls
+        pynmea2.NMEASentence.sentence_types[stype] = scls
 
     # 3. Furuno Sonar (SD* talker)
-    pynmea2.Sentence.sentence_types['BB']  = SDBB
-    pynmea2.Sentence.sentence_types['DBT'] = SDDBT
+    pynmea2.NMEASentence.sentence_types['BB']  = SDBB
+    pynmea2.NMEASentence.sentence_types['DBT'] = SDDBT
 
     # 4. Furuno (Manufacturer FEC)
     if 'FEC' not in pynmea2.ProprietarySentence.sentence_types:

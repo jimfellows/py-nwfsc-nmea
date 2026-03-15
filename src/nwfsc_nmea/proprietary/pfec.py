@@ -1,4 +1,4 @@
-from pynmea2 import ProprietarySentence
+from pynmea2 import ProprietarySentence, NMEASentence
 
 class FECSentence(ProprietarySentence):
     """

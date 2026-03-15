@@ -1,8 +1,4 @@
-import pynmea2
-from pynmea2.types.proprietary import ProprietarySentence
-
-# Explicitly export Sentence for use in this module
-from pynmea2 import Sentence
+from pynmea2 import ProprietarySentence, NMEASentence
 
 class SimradSentence(ProprietarySentence):
     """
@@ -162,7 +158,7 @@ class PSIT(ProprietarySentence):
         ("Data", "data"),
     )
 
-class SimradIIData(pynmea2.Sentence):
+class SimradIIData(NMEASentence):
     """
     Base for Simrad @II sentences
     Note: These use @ as start delimiter
@@ -180,7 +176,7 @@ class DBS(SimradIIData):
         ("Empty 3", "_")
     )
 
-class MTW(Sentence):
+class MTW(NMEASentence):
     """ $IIMTW, xx.x, C """
     fields = (
         ("Temperature", "temperature"),
@@ -292,7 +288,7 @@ class DAD(SimradIIData):
         ("Rate Unit", "rate_unit"),
     )
 
-class GLL(Sentence):
+class GLL(NMEASentence):
     """ $IIGLL - Trawl Lat/Lon """
     fields = (
         ("Latitude", "lat"),

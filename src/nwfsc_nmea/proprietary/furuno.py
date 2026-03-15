@@ -1,6 +1,6 @@
-from pynmea2 import Sentence
+from pynmea2 import NMEASentence
 
-class SDBB(Sentence):
+class SDBB(NMEASentence):
     """
     Furuno Sounder/Fish Finder Data
     $SDBB,depth,unit
@@ -10,7 +10,7 @@ class SDBB(Sentence):
         ("Unit", "unit"),
     )
 
-class SDDBT(Sentence):
+class SDDBT(NMEASentence):
     """
     Furuno Depth Below Transducer
     $SDDBT,feet,f,meters,M,fathoms,F
