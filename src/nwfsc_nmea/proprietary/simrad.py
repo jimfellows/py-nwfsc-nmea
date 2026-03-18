@@ -1,4 +1,4 @@
-from pynmea2 import ProprietarySentence, NMEASentence
+from pynmea2 import ProprietarySentence, NMEASentence, TalkerSentence
 
 class SimradSentence(ProprietarySentence):
     """
@@ -158,7 +158,7 @@ class PSIT(ProprietarySentence):
         ("Data", "data"),
     )
 
-class SimradIIData(NMEASentence):
+class SimradIIData(TalkerSentence):
     """
     Base for Simrad @II sentences
     Note: These use @ as start delimiter
@@ -176,7 +176,7 @@ class DBS(SimradIIData):
         ("Empty 3", "_")
     )
 
-class MTW(NMEASentence):
+class MTW(TalkerSentence):
     """ $IIMTW, xx.x, C """
     fields = (
         ("Temperature", "temperature"),

@@ -14,6 +14,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "duckdb>=1.5.0",
+    "nox>=2026.2.9",
     "numpy>=2.4.3",
     "pyarrow>=23.0.1",
     "pytest>=7.0.0",

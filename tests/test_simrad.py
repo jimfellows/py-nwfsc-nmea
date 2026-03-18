@@ -5,7 +5,7 @@ import pytest
 def test_psimp_parsing():
     # Example PSIMP D1 sentence based on documentation
     # $PSIMP,D1,201856,130326,D,M,1,10,1,15.5,0.1,2,0,45,15,20,1,0*23
-    raw = "$PSIMP,D1,201856,130326,D,M,1,10,1,15.5,0.1,2,0,45,15,20,1,0*23"
+    raw = "$PSIMP,D1,201856,130326,D,M,1,10,1,15.5,0.1,2,0,45,15,20,1,0*3F"
     msg = pynmea2.parse(raw, check=False)
     
     assert isinstance(msg, nwfsc_nmea.proprietary.simrad.PSIMP)
@@ -28,7 +28,7 @@ def test_psimtv80_parsing():
     # $PSIMTV80,123456,130326,4736.12,N,12220.45,W,4736.12,N,12220.45,W,10.50,180.00,185.00,150.5,01,a01,b02,50.25,10,123456*12
     # Note: Checksum *12 is a placeholder, pynmea2 might complain if it's incorrect.
     # We can use check=False or provide a valid one.
-    raw = "$PSIMTV80,123456,130326,4736.12,N,12220.45,W,4736.12,N,12220.45,W,10.50,180.00,185.00,150.5,01,a01,b02,50.25,10,123456*12"
+    raw = "$PSIMTV80,123456,130326,4736.12,N,12220.45,W,4736.12,N,12220.45,W,10.50,180.00,185.00,150.5,01,a01,b02,50.25,10,123456*24"
     msg = pynmea2.parse(raw, check=False)
     
     assert isinstance(msg, nwfsc_nmea.proprietary.simrad.PSIMTV80)
@@ -51,13 +51,13 @@ def test_psimtv80_parsing():
 
 def test_legacy_ii_parsing():
     # DBS: Depth Below Surface
-    raw = "@IIDBS,,,12.5,M,,*23"
+    raw = "@IIDBS,,,12.5,M,,*00"
     msg = pynmea2.parse(raw, check=False)
     assert isinstance(msg, nwfsc_nmea.proprietary.simrad.DBS)
     assert msg.depth == '12.5'
 
     # HFB: Headrope to Footrope
-    raw = "@IIHFB,10.0,M,15.0,M*23"
+    raw = "@IIHFB,10.0,M,15.0,M*49"
     msg = pynmea2.parse(raw, check=False)
     assert isinstance(msg, nwfsc_nmea.proprietary.simrad.HFB)
     assert msg.opening == '10.0'
@@ -66,7 +66,7 @@ def test_legacy_ii_parsing():
 def test_psim_combined_parsing():
     # PSIMDE: Slant, Horizontal, Bearing, Depth, Time
     # $PSIMDE,100,M,80,M,180.0,T,12.5,M,202349*23
-    raw = "$PSIMDE,100,M,80,M,180.0,T,12.5,M,202349*23"
+    raw = "$PSIMDE,100,M,80,M,180.0,T,12.5,M,202349*3B"
     msg = pynmea2.parse(raw, check=False)
     assert isinstance(msg, nwfsc_nmea.proprietary.simrad.PSIMDE)
     assert msg.slant_range == '100'

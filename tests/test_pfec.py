@@ -4,7 +4,7 @@ import pytest
 
 def test_gpatt_parsing():
     # $PFEC,GPatt,hhh.h,pp.p,rr.r
-    raw = "$PFEC,GPatt,180.0,1.2,0.5*23"
+    raw = "$PFEC,GPatt,180.0,1.2,0.5*47"
     msg = pynmea2.parse(raw, check=False)
     
     assert isinstance(msg, nwfsc_nmea.proprietary.pfec.GPATT)
@@ -14,7 +14,7 @@ def test_gpatt_parsing():
 
 def test_gphve_parsing():
     # $PFEC,GPhve,xx.xxx,A
-    raw = "$PFEC,GPhve,0.125,A*0A"
+    raw = "$PFEC,GPhve,0.125,A*39"
     msg = pynmea2.parse(raw, check=False)
     
     assert isinstance(msg, nwfsc_nmea.proprietary.pfec.GPHVE)
@@ -23,7 +23,7 @@ def test_gphve_parsing():
 
 def test_sdbhr_parsing():
     # $PFEC,SDbhr,val,stat
-    raw = "$PFEC,SDbhr,15,A*23"
+    raw = "$PFEC,SDbhr,15,A*16"
     msg = pynmea2.parse(raw, check=False)
     assert isinstance(msg, nwfsc_nmea.proprietary.pfec.SDBHR)
     assert msg.value == '15'
