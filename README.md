@@ -18,14 +18,50 @@ uv add --git https://github.com/jim-f/py-nwfsc-nmea.git
 *Note: Requires `pynmea2`.*
 
 ## Usage
+This package extends and build on top of pynmea2 by registering
+logic for proprietary sentences not included in the base library.
 
+So, you can parse standard sentences
+```python
+import pynmea2
+import nwfsc_nmea
+
+# Example GPRMC sentence (Standard GPS data)
+# Structure: Time, Status, Lat, N/S, Lon, E/W, Speed(kn), Course, Date, MagVar, Checksum
+raw_data = "$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W*6A"
+
+msg = pynmea2.parse(raw_data)
+
+# Standard GPRMC attributes provided by pynmea2
+print(f"Timestamp: {msg.timestamp}")
+print(f"Latitude:  {msg.latitude}")
+print(f"Longitude: {msg.longitude}")
+print(f"Speed (knots): {msg.spd_over_grnd}")
+```
+
+Or proprietary ones:
 ```python
 import pynmea2
 import nwfsc_nmea
 
 # The proprietary sentences are automatically registered upon importing nwfsc_nmea
-msg = pynmea2.parse("$PSIMP,D1,1,L,12.5,M,0.0,M,0.0,M*45")
-print(msg.depth)
+msg = pynmea2.parse("$PSIMP,D1,123456,180326,D,M,1,1,1,42.5,0.1,2,0,75,12,25,1,0*08")
+
+print(f"Date: {msg.date}")
+print(f"Time: {msg.time}")
+print(f"Unit: {msg.unit}")
+print(f"Sensor Number: {msg.sensor_num}")
+print(f"Measurement Number: {msg.measurement_num}")
+print(f"Channel: {msg.channel}")
+print(f"Value: {msg.value}")
+print(f"Change Rate: {msg.change_rate}")
+print(f"Quality: {msg.quality}")
+print(f"Interference: {msg.interference}")
+print(f"Signal Level: {msg.signal_level}")
+print(f"Noise Level: {msg.noise_level}")
+print(f"Gain: {msg.gain}")
+print(f"Cable Quality: {msg.cable_quality}")
+print(f"Error: {msg.error_code}")
 ```
 
 ## Development
